@@ -74,7 +74,7 @@ jobs:
       run: |
          c:
          cd \temp\harbour
-         7z a -r c:\temp\oohg_hb34_mingw_0703.7z c:\temp\harbour\addons\oohg\*.*  -xr'!.git' -xr'!.github'
+         7z a -r c:\temp\oohg_hb34_mingw_0703.7z c:\temp\harbour\addons\oohg\*.*  -xr'!.git' -xr'!.github' -xr'!.hbmk'
 
     - name: Save
       uses: actions/upload-artifact@v2
