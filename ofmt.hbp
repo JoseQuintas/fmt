@@ -1,35 +1,8 @@
-#
-# $Id: ofmt.hbp $
-#
+oohg.hbc
 
-# name of output file
 -oofmt
 
-# compilation is incremental (hidden .hmk folder is created)
--inc
+-gtgui
 
-# check all errors
--w3
--es2
-
-# other harbour´s flags
--n -q0
-
-#alerts on exit
--beep
-
-# uncomment the following lines to get detailed build info
-#-trace
-#-info
-
-# libs
-${HG_ROOT}\oohg.hbc
-
-# gt
--gui
-
-# files to compile and link
 fmt.prg
 fmtcls.prg
-
-#EOF
