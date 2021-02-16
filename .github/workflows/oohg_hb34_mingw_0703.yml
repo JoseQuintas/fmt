@@ -8,7 +8,7 @@ name: OOHG Harbour 3.4 mingw 7.3 32/64 bits
 on:
   push:
   schedule:
-   - cron: "0 12 1 * *"
+   - cron: "30 5 1 * *"
   workflow_dispatch:
     inputs:
       name:
@@ -44,29 +44,32 @@ jobs:
       run: |
          c:
          md \temp\harbour\addons
-         git clone https://github.com/$env:repo c:\temp\harbour\addons\oohg\ --depth 10
+         git clone https://github.com/JoseQuintas/oohg_core c:\temp\harbour\addons\oohg\ --depth 1
+         git clone https://github.com/$env:repo c:\temp\harbour\addons\oohg\ofmt --depth 1
 
     - name: Build 32 bits
       env:
          HB_COMPILER: mingw
          HB_INSTALL_PREFIX: c:\temp\harbour
          PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin
-         HBMK_CMD: -q -rebuild -workdir=c:\temp
       run: |
          c:
          cd c:\temp\harbour\addons\oohg
-         copy test\hbmk.hbc \temp\harbour\bin
-         hbmk2 *.hbp
+         hbmk2 *.hbp -q -workdir=c:\temp oohg.hbc
+         cd \temp\harbour\addons\oohg\ofmt
+         hbmk2 *.hbp -q -workdir=c:\temp oohg.hbc
 
     - name: Build 64 bits
       env:
          HB_COMPILER: mingw64
          HB_INSTALL_PREFIX: c:\temp\harbour
-         PATH: c:\temp\harbour\comp\mingw64\bin
+         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin
       run: |
          c:
          cd \temp\harbour\addons\oohg
-         hbmk2 *.hbp
+         hbmk2 *.hbp -q -workdir=c:\temp oohg.hbc
+         cd \temp\harbour\addons\oohg\ofmt
+         hbmk2 *.hbp -q -workdir=c:\temp oohg.hbc
 
     - name: Zip
       env:
@@ -81,14 +84,3 @@ jobs:
       with:
          name: oohg_hb34_mingw_0703
          path: c:\temp\oohg_hb34_mingw_0703.7z
-
-#    - name: TestAll
-#      env:
-#         HB_COMPILER: mingw
-#         HB_INSTALL_PREFIX: c:\temp\harbour
-#         PATH: c:\temp\harbour\bin;c:\temp\harbour\comp\mingw64\bin
-#         HBMK_CMD: -q -rebuild -workdir=c:\temp
-#      run: |
-#         c:
-#         cd c:\temp\harbour\addons\oohg\test
-#         hbmk2 testall.hbp -q -workdir=c:\temp

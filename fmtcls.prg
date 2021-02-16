@@ -73,7 +73,6 @@
 #ifdef __XHARBOUR__
    #pragma gc0
 
-   #xtranslate hb_ps()                            =>   hb_OsPathSeparator()
    #xtranslate hb_StrShrink( <char>, <nLen> )     =>   Left( <char>, Len( <char> ) - <nLen> )
    #xtranslate hb_StrShrink( <char> )             =>   Left( <char>, Len( <char> ) - 1 )
    #xtranslate hb_AIns( <arr>, <nItem>, <value> ) =>   AIns( <arr>, <nItem> ) ;; <arr>\[ <nItem> \] := <value>
@@ -178,9 +177,9 @@ CREATE CLASS TFormatCode
 
    And others not:
       DO WHILE
-         .... 
-         DEFINE WINDOW          
-            ....                
+         ....
+         DEFINE WINDOW
+            ....
       ENDDO
       ...
       END WINDOW
